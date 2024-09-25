@@ -11,7 +11,7 @@
   <title><?php echo $title ?> | <?php echo $_SESSION['system']['name'] ?></title>
   <?php ob_end_flush(); ?>
 
-  <link rel="icon" type="image/x-icon" href="assets/uploads/kr8_favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="assets/uploads/logo.svg">
   <!-- Google Font: Source Sans Pro -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
