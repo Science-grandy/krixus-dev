@@ -8,6 +8,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Krixus simplifies school data management by offering a comprehensive result portal and other digital tools to schools across Africa.">
+	<meta name="keywords" content="Krixus, school management system, school result portal, Africa, data management, educational tools, innovation, technology">
+	<meta name="author" content="Krixus">
+	<meta name="robots" content="index, follow">
+	<meta property="og:title" content="Krixus - Simplifying School Data Management">
+	<meta property="og:description" content="Krixus empowers schools with innovative digital tools to manage student records, results, and more.">
+	<meta property="og:image" content="https://krixus.kodin.ng/assets/img/logo.svg">
+	<meta property="og:url" content="https://krixus.kodin.ng">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Krixus">
+	<meta property="og:locale" content="en_US">
 	<title>Krixus | Modular platform for managing school data</title>
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
