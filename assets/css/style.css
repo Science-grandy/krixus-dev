@@ -1,0 +1,247 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* Custom Styles */
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+*, html, body {
+  font-family: "Mulish", sans-serif;
+}
+a {
+  text-decoration: none;
+}
+p, .list, select {
+  font-size: 1rem;
+  color: #616161;
+}
+h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.bg-primary, .btn-primary {
+  background: #0084D7 !important;
+}
+button #outline-btn:hover {
+  color: #0084D7;
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+.btn {
+  border-radius: 0.25rem;
+  padding: 8px 20px;
+}
+
+.btn:focus, a:focus {
+  outline: none;
+}
+.navbar-toggler:focus, .btn:focus, .form-control:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+/* Hero Section */
+.cta-section {
+  padding: 80px 0;
+}
+.cta-section .cta-text h1 {
+  font-size: 54px;
+  font-weight: bold;
+}
+.cta-section .cta-text p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Page Section */
+.page-top-section {
+  padding: 60px 0 30px 0;
+}
+.page-section {
+  padding: 40px 0 60px 0;
+}
+.page-section .heading {
+  width: 80%;
+}
+.page-section h1 {
+  font-size: 42px;
+}
+.feature-icon img {
+  width: 30px;
+}
+.card {
+  position: relative;
+  border-color: #CDCDCD;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top-right-radius: 4px;
+}
+.badge-1, .badge-2, .badge-3, .badge-4 {
+  width: 23%;
+  background: #F2F2FF;
+}
+.badge-1::before {
+  border-top: 30px solid #0084D7;
+  border-left: 30px solid transparent;
+}
+.badge-2::before {
+  border-top: 30px solid #61BF33;
+  border-left: 30px solid transparent;
+}
+.badge-3::before {
+  border-top: 30px solid #F19900;
+  border-left: 30px solid transparent;
+}
+.badge-4::before {
+  border-top: 30px solid #F00001;
+  border-left: 30px solid transparent;
+}
+.card .card-text li, .card p {
+  font-size: 15px;
+  line-height: 34px;
+  color: #616161;
+}
+/* Features Section */
+.ft_img {
+  border-radius: 4px;
+}
+.full_page {
+  height: 72.3vh;
+}
+.half_page {
+  height: 55.3vh;
+}
+/* Alert styling */
+.fade-out-up {
+  animation: fadeOutUp 0.5s ease-out forwards;
+}
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .page-top-section {
+    padding: 60px 0 10px 0;
+  }
+  .btn-lg {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  section {
+    text-align: center;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 50px 0;
+  }
+
+  .cta-section .cta-text h1{
+    font-size: 32px;
+  }
+
+  .cta-section .cta-text p {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .cta-section img {
+    width: 400px;
+    margin-left: -20px;
+  }
+
+  /* Page Section */
+  .page-section {
+    padding: 20px 0;
+    text-align: center;
+  }
+  .page-section .heading {
+    width: 100%;
+  }
+  .page-section .intern, .page-section form {
+    text-align: left;
+  }
+  .page-section .page-text h1 {
+    font-size: 28px;
+  }
+  .page-section .page-text .btn {
+    margin-bottom: 30px;
+  }
+  .page-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .card {
+    height: auto;
+    padding: 30px 0;
+    margin-bottom: 15px;
+  }
+  .badge-1, .badge-2, .badge-3, .badge-4 {
+    width: 100%;
+  }
+  .card img {
+    width: 100%;
+    height: 200px;
+  }
+  .card-body {
+    padding: 5px 20px 15px 20px;
+  }
+  .card-subtitle {
+    font-size: 16px;
+  }
+  .card-text {
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .card-link {
+    font-size: 16px;
+  }
+
+  /* Hero Section */
+  .hero-section, .footer-section {
+    padding: 20px;
+  }
+  .hero-heading {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  .hero-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .hero-section img {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* Footer Section */
+  #newsletter1 {
+    font-size: 16px;
+  }
+  footer h5 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  footer p, ul li {
+    font-size: 16px;
+  }
+}
