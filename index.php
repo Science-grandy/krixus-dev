@@ -7,7 +7,7 @@ include_once "header.php";
 	<div class="container py-2">
 		<div class="row align-items-center">
 		  <div class="col-md-5 cta-text text-center text-md-start">
-				<h1>Empowering AfrSchoolsica with Krixus</h1>
+				<h1>Empowering Schools with Krixus</h1>
 				<p>A Comprehensive System for School Data Management with a modern touch and feel.</p>
 				<a href="subscription" class="col-8 col-md-6 btn btn-warning mb-2 mb-md-0 me-md-0">Get the Result Portal</a>
 				<a href="#demorequest" class="col-8 col-md-5 btn btn-primary mb-2 mb-md-0">Request a Demo</a>
