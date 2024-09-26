@@ -40,6 +40,7 @@
 		      <li class="nav-item"><a class="nav-link" href="docs">Docs</a></li>
 		      <li class="nav-item"><a class="nav-link" href="features">Features</a></li>
 		      <li class="nav-item"><a class="nav-link" href="subscription">Subscribe</a></li>
+		      <li class="nav-item"><a class="nav-link" href="subscription">Subscribe</a></li>
 		    </ul>
 		    <a href="index.php#demorequest"><button class="btn btn-primary btn-sm">Request a Demo</button></a>
 		  </div>
