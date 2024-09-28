@@ -145,7 +145,7 @@
 				var price = originalPrice.replace('₦', '').replace(/,/g, '');
     			var handler = new PaystackPop();
 				handler.newTransaction({
-					key: 'pk_test_7994319236962aaaf8d47507b2774256787ed6a0',
+					key: 'pk_live_6f2118895141022759c268fe9761b6acd74a5465',
 					email: $('#email').val(),
 					amount: price * 100,
 					currency: "NGN",
