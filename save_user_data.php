@@ -1,30 +1,31 @@
 <?php
 	// Database connection
 	include_once "config.php";
+	include_once "functions.php";
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$name = sanitize($_POST['name']);
-		$school_name = sanitize($_POST['school-name']);
-		$email = sanitize($_POST['email']);
 		$plan = sanitize($_POST['plan']);
-		$plan = sanitize($_POST['duration']);
+		$email = sanitize($_POST['email']);
 		$price = sanitize($_POST['price']);
+		$duration = sanitize($_POST['duration']);
+		$school_name = sanitize($_POST['school-name']);
 
-		    // Save user data to the database
-		$sql = "INSERT INTO subscribed_users (name, school_name, email, plan, duration, price) VALUES ($name, $school_name, $email, $plan, $duration, $price)";
+		// Prepare SQL statement with placeholders
+		$sql = "INSERT INTO subscribed_users (name, school_name, email, plan, duration, price) VALUES (?, ?, ?, ?, ?, ?)";
 		$stmt = $conn->prepare($sql);
-		$stmt->bindParam(':name', $name);
-		$stmt->bindParam(':name', $school_name);
-		$stmt->bindParam(':email', $email);
-		$stmt->bindParam(':plan', $plan);
-		$stmt->bindParam(':plan', $duration);
-		$stmt->bindParam(':price', $price);
+
+		// Bind parameters ('s' for string)
+		$stmt->bind_param("ssssss", $name, $school_name, $email, $plan, $duration, $price);
 
 		if ($stmt->execute()) {
-			echo json_encode(['status' => 'success']);
+			$id = $conn->insert_id;
+			echo json_encode(['status' => 'success', 'id' => $id]);
 		} else {
 			echo json_encode(['status' => 'error']);
 		}
-	}
 
+		// Close the statement
+		$stmt->close();
+	}
 ?>

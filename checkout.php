@@ -41,7 +41,7 @@
 							<div class="form-group mb-3">
 								<label>Price</label>
 								<p id="price" class="form-control"></p>
-								<input type="hidden" name="price" value="">
+								<input type="hidden" name="price" id="price" value="">
 							</div>
 							<div class="d-grid">
 								<button id="checkout_btn" type="submit" class="btn btn-primary">Checkout</button>
@@ -118,9 +118,9 @@
 			$("#duration").text(capitalize(duration));
 
 			// Assign values to hidden input fields
-	    $("input[name='plan']").val(plan);
-	    $("input[name='duration']").val(duration);
-	    $("input[name='price']").val(originalPrice);
+			$("input[name='plan']").val(plan);
+			$("input[name='duration']").val(duration);
+			$("input[name='price']").val(originalPrice);
 		} else {
 			console.log('Price has been tampered with!');
 		}
@@ -133,8 +133,6 @@
     var form = $('#checkoutForm');
     var formData = form.serialize();
 
-    alert(formData);
-
     // Use $.ajax to save the form data
     $.ajax({
     	type: 'POST',
@@ -142,24 +140,24 @@
     	data: formData,
     	success: function(response) {
     		var res = JSON.parse(response);
-    		alert("Working!");
     		if (res.status === 'success') {
-    			var handler = PaystackPop.setup({
-            key: 'pk_test_7994319236962aaaf8d47507b2774256787ed6a0',
-            email: $('#email-address').val(), // Get email value using jQuery
-            amount: price * 100, // Amount in kobo (convert Naira to kobo)
-            currency: "NGN",
-            ref: 'PSK_' + Math.floor((Math.random() * 1000000000) + 1), // Unique reference
-            callback: function(response) {
-                // Payment successful, redirect to verification page
-            	window.location.href = 'verify.php?reference=' + response.reference;
-            },
-            onClose: function() {
-            	alert('Payment was not completed. Please try again.');
-            }
-          });
-
-    			handler.openIframe();
+				var originalPrice = $("#price").text();
+				var price = originalPrice.replace('₦', '').replace(/,/g, '');
+    			var handler = new PaystackPop();
+				handler.newTransaction({
+					key: 'pk_test_7994319236962aaaf8d47507b2774256787ed6a0',
+					email: $('#email').val(),
+					amount: price * 100,
+					currency: "NGN",
+					ref: 'PSK_' + Math.floor((Math.random() * 1000000000) + 1), // Unique reference
+					callback: function(response) {
+						// Payment successful
+						window.location.href = 'verify.php?reference=' + response.reference + '&id=' + res.id;
+					},
+					onClose: function() {
+						alert('Payment was not completed. Please try again.');
+					}
+				});
     		} else {
     			alert('Failed to save data. Please try again.');
     		}
