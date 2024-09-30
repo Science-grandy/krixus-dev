@@ -610,99 +610,119 @@ Class Action {
 		echo json_encode($response);
 	}
 	function uploadCSV() {
-	    try {
-	        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	            if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] == UPLOAD_ERR_OK) {
-	                $fileTmpPath = $_FILES['csvFile']['tmp_name'];
-
-	                if (($handle = fopen($fileTmpPath, "r")) !== FALSE) {
-	                    // Skip the first row (header row)
-	                    fgetcsv($handle, 1000, ",");
-
-	                    // Begin transaction
-	                    $this->db->begin_transaction();
-	                    $role = $_POST['role'];
-
-	                    if ($role == 'student') {
-	                        $accountStmt = $this->db->prepare("INSERT INTO students (firstname, lastname, middlename, reg_no, class_id, user_id) VALUES (?, ?, ?, ?, ?, ?)");
-	                        $checkStmt = $this->db->prepare("SELECT id FROM students WHERE reg_no = ?");
-	                    } elseif ($role == 'teacher') {
-	                        $accountStmt = $this->db->prepare("INSERT INTO teachers (firstname, lastname, middlename, teacher_code, user_id) VALUES (?, ?, ?, ?, ?)");
-	                        $checkStmt = $this->db->prepare("SELECT id FROM teachers WHERE teacher_code = ?");
-	                    } else {
-	                        throw new Exception("Invalid role specified.");
-	                    }
-
-	                    $userStmt = $this->db->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-
-	                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-	                        if ($role == 'student') {
-	                            $firstname = $data[0];
-	                            $lastname = $data[1];
-	                            $middlename = $data[2];
-	                            $reg_no = $data[3];
-	                            $class = $data[4];
-	                            $username = strtolower($data[5]);
-	                            $password = md5($data[6]);
-	                        } elseif ($role == 'teacher') {
-	                            $firstname = $data[0];
-	                            $lastname = $data[1];
-	                            $middlename = $data[2];
-	                            $code = $data[3];
-	                            $username = strtolower($data[4]);
-	                            $password = md5($data[5]);
-	                        }
-
-	                        $class_id = $this->getClassId($class);
-
-	                        if ($role == 'student') {
-	                            $checkStmt->bind_param("s", $reg_no);
-	                        }
-	                        if ($role == 'teacher') {
-	                            $checkStmt->bind_param("s", $code);
-	                        }
-	                        $checkStmt->execute();
-	                        $checkStmt->store_result();
-
-	                        if ($checkStmt->num_rows == 0) {
-	                            $userStmt->bind_param("sss", $username, $password, $role);
-	                            $userStmt->execute();
-	                            $user_id = $userStmt->insert_id;
-
-	                            if ($role == 'student') {
-	                                $accountStmt->bind_param("ssssii", $firstname, $lastname, $middlename, $reg_no, $class_id, $user_id);
-	                            }
-	                            if ($role == 'teacher') {
-	                                $accountStmt->bind_param("ssssi", $firstname, $lastname, $middlename, $code, $user_id);
-	                            }
-	                            $accountStmt->execute();
-	                        }
-	                    }
-
-	                    $this->db->commit();
-	                    $response['status'] = 1;
-	                    $response['message'] = "File data successfully imported to the database.";
-
-	                    fclose($handle);
-	                    $accountStmt->close();
-	                    $userStmt->close();
-	                    $checkStmt->close();
-	                } else {
-	                    throw new Exception("Failed to open the file.");
-	                }
-	            } else {
-	                throw new Exception("No file uploaded or an error occurred during file upload.");
-	            }
-	        } else {
-	            throw new Exception("Invalid request method.");
-	        }
-	    } catch (Exception $e) {
-	        if ($this->db->in_transaction) {
-	            $this->db->rollback();
-	        }
-	        $response = array('status' => 0, 'message' => 'Failed to import data: ' . $e->getMessage());
-	    }
-	    echo json_encode($response);
+		// Enable error reporting
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+	
+		// Start output buffering to prevent premature output
+		ob_start();
+	
+		try {
+			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+				if (isset($_FILES['csvFile']) && $_FILES['csvFile']['error'] == UPLOAD_ERR_OK) {
+					$fileTmpPath = $_FILES['csvFile']['tmp_name'];
+	
+					if (($handle = fopen($fileTmpPath, "r")) !== FALSE) {
+						// Skip the first row (header row)
+						fgetcsv($handle, 1000, ",");
+	
+						// Begin transaction
+						$this->db->begin_transaction();
+						$role = $_POST['role'];
+	
+						$userStmt = $this->db->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+	
+						if ($role == 'student') {
+							$accountStmt = $this->db->prepare("INSERT INTO students (firstname, lastname, middlename, reg_no, class_id, user_id) VALUES (?, ?, ?, ?, ?, ?)");
+							$checkStmt = $this->db->prepare("SELECT id FROM students WHERE reg_no = ?");
+						} elseif ($role == 'teacher') {
+							$accountStmt = $this->db->prepare("INSERT INTO teachers (firstname, lastname, middlename, teacher_code, user_id) VALUES (?, ?, ?, ?, ?)");
+							$checkStmt = $this->db->prepare("SELECT id FROM teachers WHERE teacher_code = ?");
+						} else {
+							throw new Exception("Invalid role specified.");
+						}
+	
+						// Process each row
+						while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+							// Check CSV structure - modify this as per your expected structure
+							if (($role == 'student' && count($data) < 7) || ($role == 'teacher' && count($data) < 6)) {
+								throw new Exception("Invalid CSV format or insufficient columns.");
+							}
+	
+							if ($role == 'student') {
+								$firstname = $data[0];
+								$lastname = $data[1];
+								$middlename = $data[2];
+								$reg_no = $data[3];
+								$class = $data[4];
+								$username = strtolower($data[5]);
+								$password = md5($data[6]);
+							} elseif ($role == 'teacher') {
+								$firstname = $data[0];
+								$lastname = $data[1];
+								$middlename = $data[2];
+								$code = $data[3];
+								$username = strtolower($data[4]);
+								$password = md5($data[5]);
+							}
+	
+							$class_id = $this->getClassId($class);
+	
+							// Check if the student/teacher already exists
+							if ($role == 'student') {
+								$checkStmt->bind_param("s", $reg_no);
+							}
+							if ($role == 'teacher') {
+								$checkStmt->bind_param("s", $code);
+							}
+							$checkStmt->execute();
+							$checkStmt->store_result();
+	
+							// If not found, insert user and account data
+							if ($checkStmt->num_rows == 0) {
+								$userStmt->bind_param("sss", $username, $password, $role);
+								$userStmt->execute();
+								$user_id = $userStmt->insert_id;
+	
+								if ($role == 'student') {
+									$accountStmt->bind_param("ssssii", $firstname, $lastname, $middlename, $reg_no, $class_id, $user_id);
+								}
+								if ($role == 'teacher') {
+									$accountStmt->bind_param("ssssi", $firstname, $lastname, $middlename, $code, $user_id);
+								}
+								$accountStmt->execute();
+							}
+						}
+	
+						// Commit transaction if all goes well
+						$this->db->commit();
+						$response = array('status' => 1, 'message' => 'File data successfully imported to the database.');
+	
+						fclose($handle);
+						$accountStmt->close();
+						$userStmt->close();
+						$checkStmt->close();
+					} else {
+						throw new Exception("Failed to open the file.");
+					}
+				} else {
+					throw new Exception("No file uploaded or an error occurred during file upload.");
+				}
+			} else {
+				throw new Exception("Invalid request method.");
+			}
+		} catch (Exception $e) {
+			// Rollback transaction in case of error
+			if ($this->db->in_transaction) {
+				$this->db->rollback();
+			}
+			$response = array('status' => 0, 'message' => 'Failed to import data: ' . $e->getMessage());
+		}
+	
+		// Clear the buffer to ensure only JSON is outputted
+		ob_end_clean();
+		echo json_encode($response);
 	}
 
     function getClassId($class) {

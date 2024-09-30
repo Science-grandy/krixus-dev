@@ -23,6 +23,19 @@ if(isset($_GET['id'])){
 			<label for="description" class="control-label">Description</label>
 			<textarea name="description" id="description" cols="30" rows="4" class="form-control"><?php echo isset($description) ? $description : '' ?></textarea>
 		</div>
+		<div class="form-group">
+		    <label for="" class="control-label">Parent Subject</label>
+		    <select name="parent_id" class="form-control select2 select2-sm" required>
+		        <?php
+		        $subjects = $conn->query("SELECT id, subject FROM subjects");
+		        while ($row = $subjects->fetch_assoc()) {
+		            $subject = ucwords($row['subject']);
+		            $selected = $row['id'] ? 'selected' : '';
+		            echo "<option value='{$row['id']}' {$selected}>{$subject}</option>";
+		        }
+		        ?>
+		    </select>
+		</div>
 	</form>
 </div>
 <script>

@@ -12,89 +12,211 @@
 <div class="col-lg-12">
 	<div class="card card-outline card-primary">
 		<div class="card-body">
-			<form action="" id="manage-student">
+			<form class="modern-form" action="" id="manage-student">
         <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
         <div class="row">
-          <div class="col-md-6">
-            <div id="msg" class=""></div>
+          <!-- Personal Information -->
+          <div class="col-12">
+            <h2 class="mb-3">Personal Information</h2>
+            <div id="msg" class="w-50"></div>
             <div class="row">
-              <div class="col-md-4 text-dark">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label for="" class="control-label">Reg No.</label>
-                  <input type="text" class="form-control form-control-sm" name="reg_no" value="<?php echo isset($reg_no) ? $reg_no : '' ?>" required>
+                  <input type="text" id="firstname" class="form-control" name="firstname" value="<?php echo isset($firstname) ? $firstname : '' ?>" placeholder=" " required>
+                  <label for="firstname">First Name</label>
                 </div>
               </div>
-              <div class="col-md-8 text-dark">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label for="" class="control-label">Username</label>
-                  <input type="hidden" id="existing_username" name="existing_username" value="<?php echo $existing_username; ?>">
-                  <input type="text" id="username" class="form-control form-control-sm" name="username" value="<?php echo isset($username) ? $username : '' ?>" required>
+                  <input type="text" id="middlename" class="form-control" name="middlename" value="<?php echo isset($middlename) ? $middlename : '' ?>" placeholder=" ">
+                  <label for="middlename">Middle Name</label>
                 </div>
               </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4 text-dark">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label for="" class="control-label">First Name</label>
-                  <input type="text" class="form-control form-control-sm" name="firstname" value="<?php echo isset($firstname) ? $firstname : '' ?>" required>
-                </div>
-              </div>
-              <div class="col-md-4 text-dark">
-                <div class="form-group">
-                  <label for="" class="control-label">Middle Name</label>
-                  <input type="text" class="form-control form-control-sm" name="middlename" value="<?php echo isset($middlename) ? $middlename : '' ?>">
-                </div>
-              </div>
-              <div class="col-md-4 text-dark">
-                <div class="form-group">
-                  <label for="" class="control-label">Last Name</label>
-                  <input type="text" class="form-control form-control-sm" name="lastname" value="<?php echo isset($lastname) ? $lastname : '' ?>" required>
+                  <input type="text" id="lastname" class="form-control" name="lastname" value="<?php echo isset($lastname) ? $lastname : '' ?>" placeholder=" " required>
+                  <label for="lastname">Last Name</label>
                 </div>
               </div> 
             </div>
-
             <div class="row">
-              <div class="col-md-8 text-dark">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label for="" class="control-label">Password</label>
-                  <input type="password" class="form-control form-control-sm" placeholder="<?php echo isset($id) ? 'Leave blank to keep current password' : 'Set a password' ?>" name="password" <?php echo isset($id) ? '' : 'required'; ?>>
-                </div>
-              </div>
-              <div class="col-md-4 text-dark">
-                <div class="form-group">
-                  <label for="" class="control-label">Gender</label>
-                  <select name="gender" class="custom-select custom-select-sm" required>
+                  <select id="gender" name="gender" class="form-select touched select2" placeholder=" " required>
+                    <option></option>
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                   </select>
+                  <label for="gender">Gender</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="date" id="dob" name="dob" class="form-control" placeholder=" " required>
+                  <label for="dob">Date of Birth</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="type" id="nationality" name="nationality" class="form-control" placeholder=" " required>
+                  <label for="nationality">Nationality</label>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-md-6">
-            <div class="form-group text-dark">
-              <div class="form-group">
-                <label for="" class="control-label">Address</label>
-                <textarea name="address" id="address" cols="30" rows="4" class="form-control"><?php echo isset($address) ? $address : '' ?></textarea>
+          <!-- Contact Information -->
+          <div class="col-12">
+            <h2 class="mb-3">Contact Information</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="email" id="student-email" name="student-email" class="form-control" placeholder=" " required>
+                  <label for="student-email">Students Email</label>
+                </div>
               </div>
-            </div>
-            <div class="form-group text-dark">
-              <div class="form-group">
-                <label for="" class="control-label">Class</label>
-                <select name="class_id" class="form-control select2 select2-sm" required>
-                  <option></option> 
-                  <?php 
-                        $classes = $conn->query("SELECT * FROM classes order by level asc,section asc ");
-                        while($row = $classes->fetch_array()):
-                  ?>
-                        <option value="<?php echo $row['id'] ?>" <?php echo isset($class_id) && $class_id == $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['level'].'-'.$row['section']) ?></option>
-                  <?php endwhile; ?>
-                </select>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="phone" id="student-phone" name="student-phone" class="form-control" placeholder=" " required>
+                  <label for="student-phone">Students Phone No.</label>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <select id="state" name="state" class="form-select select2" placeholder=" " required>
+                    <option></option>
+                    <option value="imo">Imo</option>
+                    <option value="enugu">Enugu</option>
+                    <option value="abia">Abia</option>
+                    <option value="lagos">Lagos</option>
+                  </select>
+                  <label for="state">State</label>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <select id="country" name="country" class="form-select select2" placeholder=" " required>
+                    <option></option>
+                    <option value="nigeria">Nigeria</option>
+                  </select>
+                  <label for="country">Country of Residence</label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <input type="text" name="address" id="address" class="form-control" placeholder=" " value="<?php echo isset($address) ? $address : '' ?>">
+                  <label for="address">Street address</label>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Guardian/Parent Information -->
+          <div class="col-12">
+            <h2 class="mb-3">Guardian/Parent Information</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="type" id="gp-name" name="gp-name" class="form-control" placeholder=" " required>
+                  <label for="gp-name">Guardian/Parent Full Name</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="type" id="gp-relate" name="gp-relate" class="form-control" placeholder=" " required>
+                  <label for="gp-relate">Relationship to Students</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="email" id="student-email" name="student-email" class="form-control" placeholder=" " required>
+                  <label for="student-email">Students Email</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="phone" id="student-phone" name="student-phone" class="form-control" placeholder=" " required>
+                  <label for="student-phone">Students Phone No.</label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <input type="text" name="address" id="address" class="form-control" placeholder=" " value="<?php echo isset($address) ? $address : '' ?>">
+                  <label for="address">Street address</label>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <select id="parent-state" name="parent-state" class="form-select select2" placeholder=" " required>
+                    <option></option>
+                    <option value="imo">Imo</option>
+                    <option value="enugu">Enugu</option>
+                    <option value="abia">Abia</option>
+                    <option value="lagos">Lagos</option>
+                  </select>
+                  <label for="parent-state">State</label>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <select id="parent-country" name="parent-country" class="form-select select2" placeholder=" " required>
+                    <option></option>
+                    <option value="nigeria">Nigeria</option>
+                  </select>
+                  <label for="parent-country">Country of Residence</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- Class -->
+            <div class="form-group">
+              <div class="form-group">
+                <select id="applied-class" name="class_id" class="form-select touched select2" placeholder=" " required>
+                  <option></option> 
+                  <?php 
+                    $classes = $conn->query("SELECT * FROM classes order by level asc,section asc ");
+                    while($row = $classes->fetch_array()):
+                  ?>
+                  <option value="<?php echo $row['id'] ?>" <?php echo isset($class_id) && $class_id == $row['id'] ? "selected" : '' ?>><?php echo ucwords($row['level'].'-'.$row['section']) ?></option>
+                  <?php endwhile; ?>
+                </select>
+                <label for="applied-class">Class</label>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Account Information -->
+          <div class="col-12">
+            <h2 class="mb-3">Account Information</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input id="reg-no" type="text" class="form-control" name="reg_no" value="<?php echo isset($reg_no) ? $reg_no : '' ?>" placeholder=" " required>
+                  <label for="reg-no">Reg No.</label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <input type="hidden" id="existing_username" name="existing_username" value="<?php echo $existing_username; ?>">
+                  <input type="text" id="username" class="form-control" name="username" value="<?php echo isset($username) ? $username : '' ?>" placeholder=" " required>
+                  <label for="username">Username</label>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <input type="password" id="password" class="form-control" placeholder="<?php echo isset($id) ? 'Leave blank to keep current password' : ' ' ?>" name="password" <?php echo isset($id) ? '' : 'required'; ?>>
+                  <label for="password">Set password</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          
           <input type="hidden" name="role" value="student">
         </div>
       </form>
@@ -128,9 +250,9 @@ $(document).ready(function() {
     if (username && username !== existingUsername) {
       checkUsername(username).done(function(response) {
         if (response.status == 0) {
-          $('#msg').html('<div class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> ' + response.message + '</div>');
+          $('#msg').html('<div class="alert alert-danger w-50"><i class="fa fa-exclamation-triangle"></i> ' + response.message + '</div>');
         } else {
-          $('#msg').html('<div class="alert alert-success"><i class="fa fa-check"></i> ' + response.message + '</div>');
+          $('#msg').html('<div class="alert alert-success w-50"><i class="fa fa-check"></i> ' + response.message + '</div>');
         }
       });
     }

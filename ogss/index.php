@@ -130,7 +130,7 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <strong>Online Result Checking Portal <a href="https://krixus.kodin.ng" target="_blank">Learn more</a>.</strong>
+    <strong>Online Result Checking Portal <a href="https://portal.kr8.ng" target="_blank">Learn more</a>.</strong>
    
     <div class="float-right d-none d-sm-inline-block">
       <b><?php echo $_SESSION['system']['name'] ?></b>

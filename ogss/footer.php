@@ -118,7 +118,7 @@ $(function () {
     
 
   })
- $(".switch-toggle").bootstrapToggle();
+$(".switch-toggle").bootstrapToggle();
 $('.number').on('input keyup keypress',function(){
         var val = $(this).val()
         val = val.replace(/[^0-9]/, '');
@@ -126,6 +126,9 @@ $('.number').on('input keyup keypress',function(){
         val = val > 0 ? parseFloat(val).toLocaleString("en-US") : 0;
         $(this).val(val)
     })
+function printBroadsheet() {
+    window.print();
+}
 </script>
 <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->

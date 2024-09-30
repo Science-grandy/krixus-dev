@@ -126,3 +126,168 @@
     max-height: unset;
   }
 }
+
+/* Form Group Styling */
+.modern-form .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.modern-form h2 {
+  font-size: 20px;
+  color: #616161;
+  font-weight: 600;
+}
+
+.modern-form .form-control,
+.modern-form .form-select,
+.modern-form textarea {
+  width: 100%;
+  padding: 22px 10px !important;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.modern-form .form-control:focus,
+.modern-form .form-select:focus,
+.modern-form textarea:focus {
+  border-color: #0084d7;
+  box-shadow: none;
+}
+
+/* Label styling for input placeholders */
+.modern-form .form-group label {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: white;
+  padding: 0 5px;
+  color: #616161;
+  transition: 0.3s ease;
+  pointer-events: none;
+}
+
+.modern-form .form-control:focus ~ label,
+.modern-form .form-control:not(:placeholder-shown) ~ label,
+.modern-form .form-select:focus ~ label,
+.modern-form .form-select:not(:disabled):not([value=""]) ~ label,
+.modern-form textarea:focus ~ label,
+.modern-form textarea:not(:placeholder-shown) ~ label {
+  top: -10px;
+  left: 12px;
+  font-size: 12px;
+  color: #0084d7;
+}
+
+/* Dropdown Options Styling */
+.modern-form .form-select option {
+  padding: 10px;
+  background-color: white;
+  color: #616161;
+}
+
+/* Hover Styling for Options */
+.modern-form .form-select option:hover {
+  background-color: var(--blue);
+  color: white;
+}
+
+/* Checkbox Group Styling */
+.checkbox-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Custom Checkbox Styling */
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-ash);
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
+  background-color: var(--blue);
+  border-color: var(--blue);
+}
+
+.custom-checkbox input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked::after {
+  display: block;
+}
+
+.custom-checkbox label {
+  display: inline-block;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.custom-checkbox input[type="checkbox"]:focus {
+  outline: none;
+  border-color: none;
+}
+/* Checkbox error message */
+.checkbox-err-msg {
+  color: red;
+  font-size: 14px;
+}
+
+/* Error Styling */
+.modern-form .form-control.touched:invalid,
+.modern-form .form-select.touched:invalid {
+  border-color: #f00001;
+}
+
+.modern-form .form-group .modern-form textarea {
+  resize: none;
+  height: 150px;
+}
+
+/* Submit Button */
+#submit-btn {
+  background-color: #f29901;
+  border-color: #f29901;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+#submit-btn:active {
+  background-color: rgba(242, 153, 1, 0.8);
+  color: #fff;
+}
+
+#submit-btn:disabled {
+  background-color: rgba(242, 153, 1, 0.6);
+  cursor: not-allowed;
+}
+
+#submit-btn.requesting {
+  opacity: 0.6;
+  pointer-events: none;
+}

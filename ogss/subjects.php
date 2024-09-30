@@ -31,7 +31,7 @@
 					while($row= $qry->fetch_assoc()):
 					?>
 					<tr>
-						<th class="text-center"><?php echo $i++ ?></th>
+						<td class="text-center"><?php echo $i++ ?></td>
 						<td><b><?php echo ucwords($row['subject_code']) ?></b></td>
 						<td><b><?php echo ucwords($row['subject']) ?></b></td>
 						<td><p class=""><?php echo $row['description'] ?></p></td>

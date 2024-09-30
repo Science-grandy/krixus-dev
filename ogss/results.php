@@ -84,7 +84,7 @@
             <div class="col-md-2 my-4">
                 <div class="card-tools">
                     <?php if ($_SESSION['login_role'] == "admin") {
-                        echo '<a id="broadsheet" href="index.php?page=broadsheet" class="btn btn-block btn-sm btn-secondary btn-flat">View Broadsheet</a>';
+                        echo '<a id="broadsheet" href="index.php?page=broadsheet" class="btn btn-sm btn-primary">View Broadsheet</a>';
                     } ?>
                 </div>
             </div>
